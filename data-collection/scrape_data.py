@@ -150,6 +150,38 @@ def csv_to_dict(filename):
 
 filename = 'A-Levels_Past_papers.csv'  # Replace with your CSV file path
 data = csv_to_dict(filename)
+
+def get_download_links(url):
+    
+    try:
+
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+
+        driver.get(url)
+
+        driver.implicitly_wait(20)
+
+        page_source = driver.page_source
+
+        # Use BeautifulSoup to parse the page source
+        soup = BeautifulSoup(page_source, "html.parser")
+
+        # Find the div with id 'datafile'
+        datafile_div = soup.find('div',attrs= {'id': 'datafile'})
+
+        pdf_links = []
+        if datafile_div:
+            items = datafile_div.find_all('a',attrs= {'class': 'badge badge-info'})
+
+            for item in items:
+                pdf_links.append(item['href'].split('=')[1])
+
+        # Close Selenium browser
+        driver.quit()
+
+        return pdf_links
+    except:
+        return []
         
 
 

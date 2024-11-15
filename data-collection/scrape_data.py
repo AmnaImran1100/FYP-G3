@@ -182,6 +182,56 @@ def get_download_links(url):
         return pdf_links
     except:
         return []
+    
+def download_pdf(pdf_url, download_folder):
+    # Create download folder if it doesn't exist
+    if not os.path.exists(download_folder):
+        os.makedirs(download_folder)
+
+    # Define headers to mimic a browser request
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': 'https://pastpapers.papacambridge.com/',
+        'Accept': 'application/pdf'
+    }
+
+    try:
+        # Make a request to the PDF URL
+        response = requests.get(pdf_url, headers=headers)
+        response.raise_for_status()  # Raise an error for bad responses
+        
+        # Get the PDF filename from the URL
+        pdf_filename = os.path.join(download_folder, os.path.basename(pdf_url))
+
+        # Write the content to a PDF file
+        with open(pdf_filename, 'wb') as pdf_file:
+            pdf_file.write(response.content)
+        print(f'Downloaded: {pdf_filename}')
+
+    except requests.HTTPError as e:
+        print(f'Failed to download {pdf_url}: {e}')
+    except requests.RequestException as e:
+        print(f'Error fetching {pdf_url}: {e}')
+
+from selenium.webdriver.common.by import By
+    
+def download_pdfs_in_parallel(pdf_links, download_folder, max_workers=2):
+    """Download multiple PDFs in parallel."""
+    if not os.path.exists(download_folder):
+        os.makedirs(download_folder)
+
+    # Use ThreadPoolExecutor to download files in parallel
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        executor.map(lambda link: download_pdf(link, download_folder), pdf_links)
+
+from selenium.webdriver.common.action_chains import ActionChains
+
+for key,value in data.items():
+    pdf_links = [] 
+    for url in value:
+        if(url != "" and "https" in url):
+            pdf_links += get_download_links(url)
+    download_pdfs_in_parallel(pdf_links,key)
         
 
 

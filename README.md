@@ -1,5 +1,6 @@
 # FYP-G3
 INTRODUCTION-OVERVIEW:
+
 We are aiming to design a project which will target the students of O Levels and A Levels specifically. We want to optimize the learning and exam preparation phases for students in such a way that it would save their time and manual labor. The project would focus on making the “Yearly” and “Topicals” Past Papers and Marking Schemes available on the same website and trainging the website on them, in order to provide students with AI prompts where they can ask academic related or questions from past papers and generate past papers on the existing pattern, moreover pdf notes and books would also be available on the website for the students to refer.
 
 INTRODUCTION-MOTIVATION:
@@ -12,6 +13,7 @@ INTRODUCTION-MOTIVATION:
 4. Support student success: Provide a streamlined, accessible platform to improve the overall exam preparation process for O and A Levels. 
 
 PROBLEM STATEMENT:
+
 Clear Definition of the ProblemO and A Levels students face difficulties in efficiently managing study schedules and accessing centralized resources. Key materials like past papers, marking schemes, and notes are fragmented across multiple platforms, leading to wasted time and effort during exam preparation.
 
 Why This Problem is SignificantThis inefficiency in preparation can negatively affect students' performance in critical exams, potentially limiting their academic and career opportunities. Additionally, students from disadvantaged backgrounds often struggle to access high-quality educational resources, further widening the gap in academic outcomes.
